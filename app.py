@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from database import get_db_connection
 
@@ -31,7 +32,7 @@ def guardar():
                  (nombre, categoria, precio, stock))
     conn.commit()
     conn.close()
-    flash('Producto guardado con éxito.')
+    flash('Producto guardado con exito.')
     return redirect(url_for('index'))
 
 @app.route('/editar/<int:id>')
@@ -56,7 +57,7 @@ def actualizar():
                  (nombre, categoria, precio, stock, id))
     conn.commit()
     conn.close()
-    flash('Producto actualizado con éxito.')
+    flash('Producto actualizado con exito.')
     return redirect(url_for('index'))
 
 @app.route('/eliminar/<int:id>')
@@ -65,7 +66,7 @@ def eliminar(id):
     conn.execute('DELETE FROM productos WHERE id = ?', (id,))
     conn.commit()
     conn.close()
-    flash('Producto eliminado con éxito.')
+    flash('Producto eliminado con exito.')
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
