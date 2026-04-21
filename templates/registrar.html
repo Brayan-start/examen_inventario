@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center py-3 rounded-top">
+                <h4 class="mb-0 fw-bold"><i class="bi bi-plus-square me-2"></i>Registrar Producto</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('guardar') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">NOMBRE DEL PRODUCTO</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="bi bi-tag"></i></span>
+                            <input type="text" name="nombre" class="form-control" placeholder="Ej: Monitor 4K" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">CATEGORÍA</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="bi bi-grid-3x3-gap"></i></span>
+                            <select name="categoria" class="form-select" required>
+                                <option value="" selected disabled>Seleccione una categoría...</option>
+                                <option value="Laptops">Laptops</option>
+                                <option value="Smartphones">Smartphones</option>
+                                <option value="Monitores">Monitores</option>
+                                <option value="Accesorios">Accesorios</option>
+                                <option value="Componentes">Componentes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small fw-bold">PRECIO ($)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-currency-dollar"></i></span>
+                                <input type="number" name="precio" step="0.01" class="form-control" placeholder="0.00" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small fw-bold">STOCK INICIAL</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-stack"></i></span>
+                                <input type="number" name="stock" class="form-control" placeholder="0" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4 text-muted">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success py-2 shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i>Guardar Producto
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-light py-2 border shadow-sm text-muted">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

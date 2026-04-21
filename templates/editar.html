@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-warning text-dark text-center py-3 rounded-top">
+                <h4 class="mb-0 fw-bold"><i class="bi bi-pencil-square me-2"></i>Actualizar Producto</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('actualizar') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ producto['id'] }}">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">NOMBRE DEL PRODUCTO</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-tag"></i></span>
+                            <input type="text" name="nombre" class="form-control" value="{{ producto['nombre'] }}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">CATEGORÍA</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-grid-3x3-gap"></i></span>
+                            <select name="categoria" class="form-select" required>
+                                <option value="Laptops" {% if producto['categoria'] == 'Laptops' %}selected{% endif %}>Laptops</option>
+                                <option value="Smartphones" {% if producto['categoria'] == 'Smartphones' %}selected{% endif %}>Smartphones</option>
+                                <option value="Monitores" {% if producto['categoria'] == 'Monitores' %}selected{% endif %}>Monitores</option>
+                                <option value="Accesorios" {% if producto['categoria'] == 'Accesorios' %}selected{% endif %}>Accesorios</option>
+                                <option value="Componentes" {% if producto['categoria'] == 'Componentes' %}selected{% endif %}>Componentes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small fw-bold">PRECIO ACTUAL ($)</label>
+                            <div class="input-group shadow-sm">
+                                <span class="input-group-text bg-white"><i class="bi bi-currency-dollar"></i></span>
+                                <input type="number" name="precio" step="0.01" class="form-control" value="{{ producto['precio'] }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small fw-bold">STOCK DISPONIBLE</label>
+                            <div class="input-group shadow-sm">
+                                <span class="input-group-text bg-white"><i class="bi bi-stack"></i></span>
+                                <input type="number" name="stock" class="form-control" value="{{ producto['stock'] }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4 text-muted border-light">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning py-2 shadow-sm fw-bold">
+                            <i class="bi bi-arrow-repeat me-1"></i>Actualizar Producto
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-light py-2 border shadow-sm text-muted">
+                            <i class="bi bi-x-circle me-1"></i>Regresar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

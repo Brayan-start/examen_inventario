@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-secondary"><i class="bi bi-list-ul me-2"></i>Inventario de Productos</h2>
+    <a href="{{ url_for('registrar') }}" class="btn btn-primary shadow-sm">
+        <i class="bi bi-plus-circle me-1"></i>Nuevo Producto
+    </a>
+</div>
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-uppercase small fw-bold">
+                    <tr>
+                        <th class="ps-4">ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th class="text-center pe-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td class="ps-4 fw-bold text-muted">{{ producto['id'] }}</td>
+                        <td>{{ producto['nombre'] }}</td>
+                        <td><span class="badge bg-info text-dark">{{ producto['categoria'] }}</span></td>
+                        <td>${{ "{:,.2f}".format(producto['precio']) }}</td>
+                        <td>
+                            {% if producto['stock'] < 10 %}
+                                <span class="text-danger fw-bold">{{ producto['stock'] }} (Bajo)</span>
+                            {% else %}
+                                {{ producto['stock'] }}
+                            {% endif %}
+                        </td>
+                        <td class="text-center pe-4">
+                            <div class="btn-group shadow-sm">
+                                <a href="{{ url_for('editar', id=producto['id']) }}" class="btn btn-sm btn-outline-warning">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{{ url_for('eliminar', id=producto['id']) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Desea eliminar este producto?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <i class="bi bi-info-circle display-4 text-muted d-block mb-3"></i>
+                            <p class="text-muted">No hay productos registrados en el inventario.</p>
+                            <a href="{{ url_for('registrar') }}" class="btn btn-sm btn-outline-primary mt-2">Registrar el primero</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
