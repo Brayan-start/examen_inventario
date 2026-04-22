@@ -4,7 +4,7 @@ from database import get_db_connection
 
 app = Flask(__name__)
 app.secret_key = 'clave_secreta_inventario'
-
+# Rutas de la aplicación
 @app.route('/')
 def index():
     conn = get_db_connection()
