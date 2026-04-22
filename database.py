@@ -1,10 +1,10 @@
 import sqlite3
-
+#creando la funcion get_db_connection para conectar a la base de datos
 def get_db_connection():
     conn = sqlite3.connect('inventario.db')
     conn.row_factory = sqlite3.Row
     return conn
-
+#creando la funcion init_db para crear la tabla productos
 def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
